@@ -14,7 +14,7 @@ Git clone this repository
 ```bash
 git clone <this repository>
 ```
-**Download the [trained model](https://drive.google.com/file/d/1xvCXp8b-SWXJnpEDTwCD9MF_uIarcdm_/view?usp=drive_link) and save the model file in repository's model directory.**
+**Download the [trained model](https://drive.google.com/file/d/1xvCXp8b-SWXJnpEDTwCD9MF_uIarcdm_/view?usp=drive_link) and save .keras file in model directory.**
 
 To use this system you need to install some necessary libraries that are mentioned in requirements.txt.
 ```python

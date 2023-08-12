@@ -54,7 +54,7 @@ def categorize_resume(resume_text):
     """
     content = np.array([preprocess_text(resume_text)])
     text_to_sequence = tokenizer.texts_to_sequences(content)
-    pad_sequence = pad_sequences(text_to_sequence, maxlen=max_token, padding='post')
+    pad_sequence = pad_sequences(text_to_sequence, maxlen=max_token, padding='post', truncating = 'post')
     prediction = np.argmax(model.predict(pad_sequence), axis=1)
     category = label_encoder.inverse_transform(prediction)[0]
     return category

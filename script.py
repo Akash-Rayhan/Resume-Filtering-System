@@ -6,6 +6,7 @@ import fitz
 import pickle
 import os
 import argparse
+from tqdm import tqdm
 
 import nltk
 nltk.download('stopwords')
@@ -13,15 +14,21 @@ nltk.download('wordnet')
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 
-from tensorflow.keras.preprocessing.sequence import pad_sequences
+import tensorflow_hub as hub
+import tensorflow_text as text
 from tensorflow.keras.models import load_model
 
 
+# Define the custom layers from TF Hub
+custom_objects = {
+    'KerasLayer': hub.KerasLayer
+}
+# Load the model with custom layers
+model = load_model('model/LSTM_model_bert.keras', custom_objects=custom_objects)
 
-model = load_model('model/LSTM_model.keras')
 stop_words = stopwords.words('english')
 lemmatizer = WordNetLemmatizer()
-tokenizer,label_encoder, max_token = pickle.load(open("model/variables.p","rb"))
+label_encoder = pickle.load(open("model/variables.p","rb"))
 
 def clean_text(text):
     '''Make text lowercase,remove extra whitespaces, remove links,remove punctuation
@@ -53,9 +60,7 @@ def categorize_resume(resume_text):
     This function preprocess resume texts and passing through the model generate prediction
     """
     content = np.array([preprocess_text(resume_text)])
-    text_to_sequence = tokenizer.texts_to_sequences(content)
-    pad_sequence = pad_sequences(text_to_sequence, maxlen=max_token, padding='post', truncating = 'post')
-    prediction = np.argmax(model.predict(pad_sequence), axis=1)
+    prediction = np.argmax(model.predict(content), axis=1)
     category = label_encoder.inverse_transform(prediction)[0]
     return category
 
@@ -63,7 +68,7 @@ def categorize_resumes_in_directory(input_dir):
     categorized_resumes = []
     categories = set()
 
-    for filename in os.listdir(input_dir):
+    for filename in tqdm(os.listdir(input_dir)):
         if filename.endswith(".pdf"):
             # extract content from files 
             resume_path = os.path.join(input_dir, filename)

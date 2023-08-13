@@ -34,12 +34,17 @@ Resumes contain sequential information, where the order of words can be importan
 The LSTM-based model is constructed using Keras API. The first embedding layer converts the integer-encoded words into dense vectors of fixed size. The next Bidirectional LSTM layer processes input vectors in both forward and backward directions. This allows the model to capture context from both directions, enhancing its understanding of the text's context. The model includes fully connected dense layers for non-linear feature extraction. Dropout layers are added to mitigate overfitting by randomly deactivating a fraction of neurons during training. The final layer uses a softmax activation function. The model training and evaluation are performed using K-fold cross-validation.
 This time it got better accuracy, precision, recall than the previous one. Training accuracy 79% and test accuracy 71%. 
 
-### key insights
+### Key insights
 ![confusion_matrix](https://github.com/Akash-Rayhan/Resume-Filtering-System/assets/40039916/a3f06fd6-c198-4195-9d2c-388c446a5ee6)
 If we take a look on confusion matrix it is clearly seen the model couldn't classify any single resume in BPO and automobile categories. As the data distribution in categories is imbalanced for this dataset. BPO and Automobile categories have the least amount of data observsations. Deep learning models, like LSTMs, often require a significant amount of data to generalize well. If we can increase the amount of data points for those classes the model may predict better.
 
 
-Also LSTMs require word embeddings. Techniques like word embeddings (Word2Vec, GloVe) or even more advanced contextual embeddings (BERT) may enhance model performance. Further development was introduced based on this finding.
+Also LSTMs require word embeddings. Techniques like word embeddings (Word2Vec, GloVe) or even more advanced contextual embeddings (BERT) may enhance model performance. 
+
+### Further Development
+
+Based on above findings further development was introduced. This model utilizes a combination of BERT (Bidirectional Encoder Representations from Transformers), LSTM (Long Short-Term Memory), and Dense layers. The overall workflow involves preprocessing raw text inputs using BERT preprocessing, encoding the preprocessed text with a small BERT model, passing the contextualized embeddings through LSTM and dense layers, and finally producing classification predictions using a softmax output layer. This model outperformed above all models. Gained test accuracy 78%.
+
 
 ## Inference Pipeline
  Before running inference pipeline make sure you have gone through as guided in setup process.

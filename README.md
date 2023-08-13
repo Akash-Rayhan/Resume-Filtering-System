@@ -36,6 +36,8 @@ This time it got better accuracy, precision, recall than the previous one. Train
 
 ### Key insights
 ![confusion_matrix](https://github.com/Akash-Rayhan/Resume-Filtering-System/assets/40039916/a3f06fd6-c198-4195-9d2c-388c446a5ee6)
+
+
 If we take a look on confusion matrix it is clearly seen the model couldn't classify any single resume in BPO and automobile categories. As the data distribution in categories is imbalanced for this dataset. BPO and Automobile categories have the least amount of data observsations. Deep learning models, like LSTMs, often require a significant amount of data to generalize well. If we can increase the amount of data points for those classes the model may predict better.
 
 

@@ -14,8 +14,6 @@ Git clone this repository
 ```bash
 git clone <this repository>
 ```
-**Download the [trained model](https://drive.google.com/file/d/1xvCXp8b-SWXJnpEDTwCD9MF_uIarcdm_/view?usp=drive_link) and save .keras file in "model" directory within repository files.**
-
 To use this system you need to install some necessary libraries that are mentioned in requirements.txt.
 ```python
 
@@ -40,13 +38,11 @@ This time it got better accuracy, precision, recall than the previous one. Train
 
 If we take a look on confusion matrix it is clearly seen the model couldn't classify any single resume in BPO and automobile categories. As the data distribution in categories is imbalanced for this dataset. BPO and Automobile categories have the least amount of data observsations. Deep learning models, like LSTMs, often require a significant amount of data to generalize well. If we can increase the amount of data points for those classes the model may predict better.
 
-![confusion_matrix](https://github.com/Akash-Rayhan/Resume-Filtering-System/assets/40039916/708a34bc-d726-4171-b462-b6c72c77bc79)
-
 
 Also LSTMs require word embeddings. Techniques like word embeddings (Word2Vec, GloVe) or even more advanced contextual embeddings (BERT) may enhance model performance.
 
 ## Inference Pipeline
- Before running inference pipeline make sure you have placed the trained model file as guided in setup process.
+ Before running inference pipeline make sure you have gone through as guided in setup process.
  To categorize resumes, use the script.py script provided in the repository. Replace path/to/directory with the path to the directory containing the resumes you want to categorize.
  Run the script using the following command:
  ```powershell
